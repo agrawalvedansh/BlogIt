@@ -1,3 +1,16 @@
+GIT
+  remote: https://github.com/Shopify/erb-lint.git
+  revision: 52cbaae9e3a1a4ec7a706e4c0f26400e71576d62
+  branch: main
+  specs:
+    erb_lint (0.7.0)
+      activesupport
+      better_html (>= 2.0.1)
+      parser (>= 2.7.1.4)
+      rainbow
+      rubocop (>= 1)
+      smart_properties
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -66,10 +79,18 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    ast (2.4.2)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    better_html (2.1.1)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
+      ast (~> 2.0)
+      erubi (~> 1.4)
+      parser (>= 2.4)
+      smart_properties
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
@@ -94,6 +115,8 @@ GEM
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.9.0)
+    language_server-protocol (3.17.0.3)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -129,6 +152,10 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    parallel (1.26.3)
+    parser (3.3.6.0)
+      ast (~> 2.4.1)
+      racc
     psych (5.2.0)
       stringio
     puma (5.6.9)
@@ -167,6 +194,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    rainbow (3.1.1)
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
@@ -176,17 +204,37 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    regexp_parser (2.9.3)
     reline (0.5.11)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    rubocop (1.69.2)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.9.3, < 3.0)
+      rubocop-ast (>= 1.36.2, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 4.0)
+    rubocop-ast (1.37.0)
+      parser (>= 3.3.1.0)
+    rubocop-rails (2.27.0)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.52.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    ruby-progressbar (1.13.0)
     semantic_range (3.1.0)
     shakapacker (6.6.0)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
+    smart_properties (1.17.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -206,6 +254,9 @@ GEM
     timeout (0.4.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (3.1.2)
+      unicode-emoji (~> 4.0, >= 4.0.4)
+    unicode-emoji (4.0.4)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -227,11 +278,14 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  erb_lint!
   jbuilder
   puma (~> 5.0)
   rails (~> 7.0.5)
   react-rails (~> 2.7.1)
   responders
+  rubocop
+  rubocop-rails
   shakapacker (~> 6.6.0)
   sprockets-rails
   sqlite3 (~> 1.4)
