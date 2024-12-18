@@ -916,6 +916,11 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
+"@bigbinary/neeto-icons@^1.20.21":
+  version "1.20.21"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.20.21.tgz#a6a8b23dc83ad765bd91a68b8727becd74de379a"
+  integrity sha512-euiy9lQi0RMf25g7HOQEdZ/TVRTwZ1immtt71fvHJTX0Y1deYhhcskjVO9Pl4ddDHxQQS6yxtX8BOmdhN9H6FQ==
+
 "@csstools/cascade-layer-name-parser@^1.0.13":
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/@csstools/cascade-layer-name-parser/-/cascade-layer-name-parser-1.0.13.tgz#6900157489bc53da1f6a66eaccd432025f6cd6fb"
@@ -1555,6 +1560,11 @@
     "@svgr/core" "8.1.0"
     "@svgr/plugin-jsx" "8.1.0"
     "@svgr/plugin-svgo" "8.1.0"
+
+"@tailwindcss/line-clamp@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.4.4.tgz#767cf8e5d528a5d90c9740ca66eb079f5e87d423"
+  integrity sha512-5U6SY5z8N42VtrCrKlsTAA35gy2VSyYtHWCsg1H87NU1SXnEfekTVlrga9fzUDrrHcGi2Lb5KenUWb4lRQT5/g==
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
