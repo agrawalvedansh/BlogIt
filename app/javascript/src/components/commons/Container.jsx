@@ -7,7 +7,7 @@ import SideBar from "components/SideBar";
 const Container = ({ children }) => (
   <div className="flex">
     <SideBar />
-    <div className="w-full">{children}</div>
+    <div className="h-screen w-full overflow-auto">{children}</div>
   </div>
 );
 

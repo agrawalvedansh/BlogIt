@@ -4,8 +4,7 @@ import { isNil, isEmpty, either } from "ramda";
 
 import postsApi from "apis/posts";
 import { Container, PageTitle, PageLoader } from "components/commons";
-
-import Posts from "./Posts";
+import Posts from "components/Posts";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);

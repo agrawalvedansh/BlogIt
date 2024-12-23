@@ -1,6 +1,6 @@
 import React from "react";
 
-import { parseDate } from "../../utils/dateUtils";
+import { parseDate } from "src/utils/dateUtils";
 
 const PostCard = ({ title, preview, date }) => {
   const { day, monthName, year } = parseDate(date);

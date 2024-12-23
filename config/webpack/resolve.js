@@ -1,6 +1,6 @@
 const path = require("path");
 
-const absolutePath = (basePath) =>
+const absolutePath = basePath =>
   path.resolve(__dirname, "..", "..", `app/javascript/${basePath}`);
 
 module.exports = {
@@ -8,6 +8,7 @@ module.exports = {
     apis: absolutePath("src/apis"),
     common: absolutePath("src/common"),
     components: absolutePath("src/components"),
+    utils: absolutePath("src/utils"),
   },
   extensions: [
     ".ts",
