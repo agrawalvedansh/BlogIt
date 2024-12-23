@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :posts, only: %i[index create], param: :slug
+  resources :posts, only: %i[index create show], param: :slug
 
   root "home#index"
   get "*path", to: "home#index", via: :all
