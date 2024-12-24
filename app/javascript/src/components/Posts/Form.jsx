@@ -9,6 +9,7 @@ const Form = ({
   setDescription,
   loading,
   handleSubmit,
+  history,
 }) => (
   <div className="mx-14 flex flex-col gap-8 rounded-xl border-2 px-14 py-6">
     <Input

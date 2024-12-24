@@ -32,6 +32,7 @@ const Create = ({ history }) => {
             setDescription,
             loading,
             handleSubmit,
+            history,
           }}
         />
       </div>

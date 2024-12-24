@@ -6,7 +6,7 @@ import postsApi from "apis/posts";
 import { Container, PageTitle, PageLoader } from "components/commons";
 import Posts from "components/Posts";
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -45,10 +45,19 @@ const Dashboard = () => {
     );
   }
 
+  const handleClick = () => {
+    history.push("/posts/create");
+  };
+
   return (
     <Container>
       <div className="flex flex-col gap-y-8">
-        <PageTitle title="Blog Posts" />
+        <PageTitle
+          showButton
+          buttonLabel="Add a new blog post"
+          handleClick={handleClick}
+          title="Blog Posts"
+        />
         <Posts data={posts} />
       </div>
     </Container>
