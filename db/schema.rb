@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_12_28_083924) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_28_102420) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_28_083924) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug", null: false
+    t.integer "user_id"
+    t.integer "organization_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
@@ -49,5 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_28_083924) do
     t.integer "organization_id"
   end
 
+  add_foreign_key "posts", "organizations"
+  add_foreign_key "posts", "users", on_delete: :cascade
   add_foreign_key "users", "organizations"
 end
