@@ -16,7 +16,7 @@ const Create = ({ history }) => {
       setLoading(true);
       const category_ids = selectedCategories.map(obj => obj.value);
       await postsApi.create({ title, description, category_ids });
-      history.push("/dashboard");
+      history.push("/");
     } catch (error) {
       logger.error(error);
     }

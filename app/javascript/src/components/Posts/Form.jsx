@@ -89,7 +89,7 @@ const Form = ({
           label="Cancel"
           size="medium"
           style="tertiary"
-          onClick={() => history.push("/dashboard")}
+          onClick={() => history.push("/")}
         />
       </div>
     </div>

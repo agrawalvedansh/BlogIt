@@ -1,21 +1,38 @@
 import React from "react";
 
+import { either, isEmpty, isNil } from "ramda";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-import Signup from "./components/Authentication/Signup";
+import { Login, Signup } from "components/Authentication";
+import { PrivateRoute } from "components/commons";
+import { getFromLocalStorage } from "utils/storage";
+
 import Dashboard from "./components/Dashboard";
 import CreatePost from "./components/Posts/Create";
 import Show from "./components/Posts/Show";
 
-const App = () => (
-  <Router>
-    <Switch>
-      <Route exact component={Signup} path="/signup" />
-      <Route exact component={Show} path="/posts/:slug/show" />
-      <Route exact component={CreatePost} path="/posts/create" />
-      <Route exact component={Dashboard} path="/dashboard" />
-    </Switch>
-  </Router>
-);
+const App = () => {
+  const authToken = getFromLocalStorage("authToken");
+  const isLoggedIn = !either(isNil, isEmpty)(authToken);
+
+  return (
+    <Router>
+      <ToastContainer />
+      <Switch>
+        <Route exact component={Signup} path="/signup" />
+        <Route exact component={Login} path="/login" />
+        <Route exact component={Show} path="/posts/:slug/show" />
+        <Route exact component={CreatePost} path="/posts/create" />
+        <PrivateRoute
+          component={Dashboard}
+          condition={isLoggedIn}
+          path="/"
+          redirectRoute="/login"
+        />
+      </Switch>
+    </Router>
+  );
+};
 
 export default App;

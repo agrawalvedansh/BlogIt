@@ -9,6 +9,8 @@ class User < ApplicationRecord
   belongs_to :organization
 
   has_secure_password
+  has_secure_token :authentication_token
+
   validates :name, presence: true, length: { maximum: MAX_NAME_LENGTH }
   validates :email, presence: true,
     uniqueness: { case_sensitive: false },
