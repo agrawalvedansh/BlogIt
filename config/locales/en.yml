@@ -30,10 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  category:
-    successfully_created: "Category was successfully created!"
+  successfully_created: "%{entity} was successfully created!"
+  successfully_updated: "%{entity} was successfully updated!"
   post:
     slug:
       immutable: "is immutable!"
-    successfully_created: "Post was successfully created!"
   generic_error: "Something went wrong. Please try again later."
