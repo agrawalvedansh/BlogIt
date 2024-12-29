@@ -13,6 +13,7 @@ class Post < ApplicationRecord
   validates_inclusion_of :is_bloggable, in: [true, false]
   validates :slug, uniqueness: true
   validate :slug_not_changed
+  before_validation :set_default_user_and_organization
   before_create :set_slug
 
   private
@@ -38,5 +39,10 @@ class Post < ApplicationRecord
       if will_save_change_to_slug? && self.persisted?
         errors.add(:slug, I18n.t("post.slug.immutable"))
       end
+    end
+
+    def set_default_user_and_organization
+      self.user = User.find(1)
+      self.organization = user&.organization
     end
 end

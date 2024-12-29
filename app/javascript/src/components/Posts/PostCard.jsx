@@ -3,7 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { parseDate } from "src/utils/dateUtils";
 
-const PostCard = ({ title, preview, date, slug }) => {
+import CategoryTags from "./CategoryTags";
+
+const PostCard = ({ title, preview, date, slug, categories, user }) => {
   const { day, monthName, year } = parseDate(date);
 
   return (
@@ -11,8 +13,12 @@ const PostCard = ({ title, preview, date, slug }) => {
       <Link className="text-2xl font-semibold" to={`/posts/${slug}/show`}>
         {title}
       </Link>
+      <CategoryTags {...{ categories }} />
       <p className="line-clamp-2">{preview}</p>
-      <p className="mt-3 border-b-2 py-2 text-xs text-slate-400">
+      <p className="mb-1 mt-3 text-xs font-semibold text-slate-600">
+        {user.name}
+      </p>
+      <p className="border-b-2 pb-2 text-xs text-slate-400">
         {day} {monthName} {year}
       </p>
     </div>

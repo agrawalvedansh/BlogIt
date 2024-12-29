@@ -9,11 +9,13 @@ const Create = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      await postsApi.create({ title, description });
+      const category_ids = selectedCategories.map(obj => obj.value);
+      await postsApi.create({ title, description, category_ids });
       history.push("/dashboard");
     } catch (error) {
       logger.error(error);
@@ -33,6 +35,8 @@ const Create = ({ history }) => {
             loading,
             handleSubmit,
             history,
+            selectedCategories,
+            setSelectedCategories,
           }}
         />
       </div>

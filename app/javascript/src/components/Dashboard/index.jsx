@@ -9,6 +9,7 @@ import Posts from "components/Posts";
 const Dashboard = ({ history }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategories, setSelectedCategories] = useState(new Set());
 
   const fetchPosts = async () => {
     try {
@@ -50,7 +51,7 @@ const Dashboard = ({ history }) => {
   };
 
   return (
-    <Container>
+    <Container {...{ selectedCategories, setSelectedCategories }}>
       <div className="flex flex-col gap-y-8">
         <PageTitle
           showButton
@@ -58,7 +59,7 @@ const Dashboard = ({ history }) => {
           handleClick={handleClick}
           title="Blog Posts"
         />
-        <Posts data={posts} />
+        <Posts data={posts} {...{ selectedCategories }} />
       </div>
     </Container>
   );
