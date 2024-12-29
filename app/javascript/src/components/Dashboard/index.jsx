@@ -36,19 +36,19 @@ const Dashboard = ({ history }) => {
     );
   }
 
+  const handleClick = () => {
+    history.push("/posts/create");
+  };
+
   if (either(isNil, isEmpty)(posts)) {
     return (
-      <Container>
+      <Container {...{ selectedCategories, setSelectedCategories }}>
         <h1 className="my-5 text-center text-xl leading-5">
           No blog posts to show.
         </h1>
       </Container>
     );
   }
-
-  const handleClick = () => {
-    history.push("/posts/create");
-  };
 
   return (
     <Container {...{ selectedCategories, setSelectedCategories }}>

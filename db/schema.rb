@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_12_28_102420) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_29_134837) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_28_102420) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "organization_id"
+    t.string "email", null: false
+    t.string "password_digest", null: false
   end
 
   add_foreign_key "posts", "organizations"
