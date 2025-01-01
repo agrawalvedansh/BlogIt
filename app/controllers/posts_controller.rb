@@ -9,9 +9,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
+    post = current_user.post.new(post_params)
     post.save!
-    rrender_notice(t("successfully_created", entity: "Post"))
+    render_notice(t("successfully_created", entity: "Post"))
   end
 
   def show
