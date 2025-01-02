@@ -4,12 +4,20 @@ class PostsController < ApplicationController
   before_action :load_post!, only: [:show]
 
   def index
-    posts = Post.all.as_json(include: { user: { only: [:name] }, categories: { only: [:id, :name] } })
+    posts = Post.where(organization: current_user.organization).all.as_json(
+      include: {
+        user: { only: [:name] },
+        categories: {
+          only: [:id,
+          :name]
+        }
+      })
     render status: :ok, json: { posts: }
   end
 
   def create
-    post = current_user.post.new(post_params)
+    post = current_user.posts.new(post_params)
+    post.organization = current_user.organization
     post.save!
     render_notice(t("successfully_created", entity: "Post"))
   end

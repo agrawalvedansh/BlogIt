@@ -7,6 +7,7 @@ class User < ApplicationRecord
   MAX_EMAIL_LENGTH = 255
 
   belongs_to :organization
+  has_many :posts
 
   has_secure_password
   has_secure_token :authentication_token
