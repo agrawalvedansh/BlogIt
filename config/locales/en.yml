@@ -39,3 +39,6 @@ en:
     slug:
       immutable: "is immutable!"
   generic_error: "Something went wrong. Please try again later."
+  authorization:
+    denied: "Access denied. You are not authorized to perform this action."
+  not_found: "Couldn't find %{entity}"
