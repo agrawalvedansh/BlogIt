@@ -6,10 +6,11 @@ json.post do
     :slug,
     :title,
     :description,
-    :created_at
+    :updated_at
 
   json.user do
     json.extract! @post.user,
+      :id,
       :name
   end
 

@@ -13,4 +13,35 @@ const getFromLocalStorage = key => {
   }
 };
 
-export { setToLocalStorage, getFromLocalStorage };
+const setCreateDraft = draft => {
+  localStorage.setItem("/create", JSON.stringify(draft));
+};
+
+const getCreateDraft = () => {
+  try {
+    return JSON.parse(localStorage.getItem("/create"));
+  } catch {
+    return null;
+  }
+};
+
+const setEditDraft = (draft, slug) => {
+  localStorage.setItem(slug, JSON.stringify(draft));
+};
+
+const getEditDraft = slug => {
+  try {
+    return JSON.parse(localStorage.getItem(slug));
+  } catch {
+    return null;
+  }
+};
+
+export {
+  setToLocalStorage,
+  getFromLocalStorage,
+  setCreateDraft,
+  getCreateDraft,
+  setEditDraft,
+  getEditDraft,
+};

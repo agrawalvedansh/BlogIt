@@ -12,8 +12,8 @@ class PostPolicy
     post.organization_id == user.organization_id
   end
 
-  def update?
-    show?
+  def edit?
+    post.user_id = user.id
   end
 
   class Scope
