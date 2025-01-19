@@ -12,6 +12,10 @@ class PostPolicy
     post.organization_id == user.organization_id
   end
 
+  def update?
+    show?
+  end
+
   class Scope
     attr_reader :user, :scope
 

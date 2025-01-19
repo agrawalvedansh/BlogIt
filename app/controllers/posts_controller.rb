@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :load_post!, only: [:show]
+  before_action :load_post!, only: %i[show update]
 
   def index
     @posts = policy_scope(Post)
@@ -17,6 +17,12 @@ class PostsController < ApplicationController
   def show
     authorize @post
     render
+  end
+
+  def update
+    authorize @post
+    @post.update!(post_params)
+    render_notice(t("successfully_updated", entity: "Post"))
   end
 
   private

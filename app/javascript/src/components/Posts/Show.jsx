@@ -8,11 +8,15 @@ import { PageLoader, Container, PageTitle } from "components/commons";
 import AuthorCard from "./AuthorCard";
 import CategoryTags from "./CategoryTags";
 
-const Show = () => {
+const Show = ({ history }) => {
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const { slug } = useParams();
+
+  const updatePost = () => {
+    history.push(`/posts/${post.slug}/edit`);
+  };
 
   const fetchPostDetails = async () => {
     try {
@@ -44,7 +48,12 @@ const Show = () => {
         <div className="relative left-14 top-24">
           <CategoryTags {...{ categories }} />
         </div>
-        <PageTitle title={title} />
+        <PageTitle
+          showButton
+          buttonLabel="Edit Post"
+          handleClick={updatePost}
+          title={title}
+        />
         <AuthorCard date={created_at} {...{ user }} />
         <p className="mx-16 whitespace-pre-wrap text-lg">{description}</p>
       </div>
