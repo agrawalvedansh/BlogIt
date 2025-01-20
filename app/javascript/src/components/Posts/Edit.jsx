@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 import postsApi from "apis/posts";
 import { Container, PageLoader, PageTitle } from "components/commons";
-import { setEditDraft, getEditDraft } from "utils/storage";
 
 import Form from "./Form";
 
@@ -16,15 +15,14 @@ const Edit = ({ history }) => {
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async status => {
     try {
       setLoading(true);
       const category_ids = selectedCategories.map(obj => obj.value);
       await postsApi.update({
         slug,
-        payload: { title, description, category_ids },
+        payload: { title, description, category_ids, status },
       });
-      localStorage.removeItem(slug);
       history.push("/dashboard");
     } catch (error) {
       logger.error(error);
@@ -33,39 +31,28 @@ const Edit = ({ history }) => {
     }
   };
 
-  const handleSaveAsDraft = () => {
-    setEditDraft({ title, description, selectedCategories }, slug);
-    history.push("/dashboard");
-  };
-
   const handleClick = label => {
+    let status;
     if (label === "Publish") {
-      handleSubmit();
+      status = "published";
     } else {
-      handleSaveAsDraft();
+      status = "draft";
     }
+    handleSubmit(status);
   };
 
   const fetchPostDetails = async () => {
     try {
-      const draft = getEditDraft(slug);
-      if (draft) {
-        const { title, description, selectedCategories } = draft;
-        setTitle(title);
-        setDescription(description);
-        setSelectedCategories(selectedCategories);
-      } else {
-        const {
-          data: {
-            post: { title, description, categories },
-          },
-        } = await postsApi.show(slug);
-        setTitle(title);
-        setDescription(description);
-        setSelectedCategories(
-          categories.map(obj => ({ value: obj.id, label: obj.name }))
-        );
-      }
+      const {
+        data: {
+          post: { title, description, categories },
+        },
+      } = await postsApi.show(slug);
+      setTitle(title);
+      setDescription(description);
+      setSelectedCategories(
+        categories.map(obj => ({ value: obj.id, label: obj.name }))
+      );
     } catch (error) {
       logger.error(error);
     } finally {

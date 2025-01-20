@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   MAX_TITLE_LENGTH = 125
   MAX_DESCRIPTION_LENGTH = 10000
 
+  enum :status, { draft: "Draft", published: "Published" }, default: :draft
+
   has_and_belongs_to_many :categories
   belongs_to :user
   belongs_to :organization

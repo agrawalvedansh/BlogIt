@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, ActionDropdown } from "@bigbinary/neetoui";
+import { Button, ActionDropdown, Tag } from "@bigbinary/neetoui";
 
 const PageTitle = ({
   title,
@@ -8,14 +8,22 @@ const PageTitle = ({
   buttonLabel,
   handleClick,
   showDropdown,
+  showDraftTag,
   history,
 }) => {
   const { Menu, MenuItem } = ActionDropdown;
   const [label, setLabel] = useState("Publish");
 
   return (
-    <div className="mx-14 mt-14 flex items-end justify-between">
+    <div className="mx-14 mt-14 flex items-center justify-between">
       <h2 className="text-5xl font-bold">{title}</h2>
+      {showDraftTag && (
+        <Tag
+          className="ml-5 mr-auto w-20 bg-white"
+          label="Draft"
+          style="danger"
+        />
+      )}
       {showButton && (
         <div>
           <Button

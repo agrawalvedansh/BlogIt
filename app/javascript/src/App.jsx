@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import CreatePost from "./components/Posts/Create";
 import EditPost from "./components/Posts/Edit";
 import Show from "./components/Posts/Show";
+import UserPosts from "./components/UserPosts";
 
 const App = () => {
   const authToken = getFromLocalStorage("authToken");
@@ -26,6 +27,7 @@ const App = () => {
         <Route exact component={Show} path="/posts/:slug/show" />
         <Route exact component={CreatePost} path="/posts/create" />
         <Route exact component={EditPost} path="/posts/:slug/edit" />
+        <Route exact component={UserPosts} path="/posts/user" />
         <PrivateRoute
           component={Dashboard}
           condition={isLoggedIn}

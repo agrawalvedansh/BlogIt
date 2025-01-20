@@ -6,7 +6,8 @@ json.post do
     :slug,
     :title,
     :description,
-    :updated_at
+    :updated_at,
+    :status
 
   json.user do
     json.extract! @post.user,

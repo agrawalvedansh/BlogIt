@@ -7,5 +7,6 @@ FactoryBot.define do
     title { Faker::Lorem.sentence[0..10] }
     description { Faker::Lorem.sentence[0..49] }
     is_bloggable { true }
+    status { "published" }
   end
 end

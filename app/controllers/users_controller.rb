@@ -3,6 +3,11 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user_using_x_auth_token, only: :create
 
+  def show
+    @user = User.find_by!(slug: params[:slug])
+    authorize @user
+  end
+
   def create
     user = User.new(user_params)
     user.save!

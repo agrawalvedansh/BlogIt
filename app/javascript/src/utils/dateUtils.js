@@ -22,5 +22,12 @@ export const parseDate = dateString => {
 
   const day = date.getUTCDate();
 
-  return { day, monthName, year };
+  let hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "pm" : "am";
+
+  hours = hours % 12;
+  const time = `${hours}:${minutes} ${ampm}`;
+
+  return { day, monthName, year, time };
 };

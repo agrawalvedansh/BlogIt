@@ -6,6 +6,7 @@ import {
   User,
   Edit,
   Category,
+  Folder,
 } from "@bigbinary/neeto-icons";
 import classNames from "classnames";
 import { useLocation, Link } from "react-router-dom";
@@ -79,6 +80,15 @@ const SideBar = ({ selectedCategories, setSelectedCategories }) => {
           })}
         >
           <Edit size={30} />
+        </Link>
+        <Link
+          to="/posts/user"
+          className={classNames("", {
+            "rounded-md border-4 border-black":
+              location.pathname === "/posts/user",
+          })}
+        >
+          <Folder size={30} />
         </Link>
         <Category
           size={30}

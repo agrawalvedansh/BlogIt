@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Input, Textarea, Button, Select } from "@bigbinary/neetoui";
+import { Input, Textarea, Select } from "@bigbinary/neetoui";
 
 import categoriesApi from "apis/categories";
 import { PageLoader } from "components/commons";
@@ -10,9 +10,6 @@ const Form = ({
   setTitle,
   description,
   setDescription,
-  loading,
-  handleSubmit,
-  history,
   selectedCategories,
   setSelectedCategories,
 }) => {
@@ -76,22 +73,6 @@ const Form = ({
         value={description}
         onChange={event => setDescription(event.target.value.slice(0, 10000))}
       />
-      <div className="flex flex-row-reverse gap-5">
-        <Button
-          className="neetix-button--primary"
-          label="Submit"
-          loading={loading}
-          size="medium"
-          type="submit"
-          onClick={() => handleSubmit()}
-        />
-        <Button
-          label="Cancel"
-          size="medium"
-          style="tertiary"
-          onClick={() => history.push("/")}
-        />
-      </div>
     </div>
   );
 };

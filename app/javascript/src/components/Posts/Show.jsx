@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import postsApi from "apis/posts";
 import { PageLoader, Container, PageTitle } from "components/commons";
 import { getFromLocalStorage } from "utils/storage";
+import stringTruncator from "utils/stringUtils";
 
 import AuthorCard from "./AuthorCard";
 import CategoryTags from "./CategoryTags";
@@ -43,7 +44,7 @@ const Show = ({ history }) => {
     return <PageLoader />;
   }
 
-  const { title, description, categories, updated_at, user } = post;
+  const { title, description, categories, updated_at, user, status } = post;
 
   return (
     <Container>
@@ -55,7 +56,8 @@ const Show = ({ history }) => {
           buttonLabel="Edit Post"
           handleClick={updatePost}
           showButton={userId === user.id}
-          title={title}
+          showDraftTag={status === "draft"}
+          title={stringTruncator(title)}
         />
         <AuthorCard date={updated_at} {...{ user }} />
         <p className="mx-16 whitespace-pre-wrap text-lg">{description}</p>

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import postsApi from "apis/posts";
 import { PageTitle, Container } from "components/commons";
-import { setCreateDraft, getCreateDraft } from "utils/storage";
 
 import Form from "./Form";
 
@@ -12,11 +11,16 @@ const Create = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async status => {
     try {
       setLoading(true);
       const category_ids = selectedCategories.map(obj => obj.value);
-      await postsApi.create({ title, description, category_ids });
+      await postsApi.create({
+        title,
+        description,
+        category_ids,
+        status,
+      });
       localStorage.removeItem("/create");
       history.push("/");
     } catch (error) {
@@ -24,27 +28,11 @@ const Create = ({ history }) => {
     }
   };
 
-  useEffect(() => {
-    const draft = getCreateDraft();
-    if (draft === null) {
-      return;
-    }
-    const { title, description, selectedCategories } = draft;
-    setTitle(title);
-    setDescription(description);
-    setSelectedCategories(selectedCategories);
-  }, []);
-
-  const handleSaveAsDraft = () => {
-    setCreateDraft({ title, description, selectedCategories });
-    history.push("/");
-  };
-
   const handleClick = label => {
     if (label === "Publish") {
-      handleSubmit();
+      handleSubmit("Published");
     } else {
-      handleSaveAsDraft();
+      handleSubmit("Draft");
     }
   };
 
