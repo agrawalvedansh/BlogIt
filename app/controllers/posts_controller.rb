@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def my_posts
-    @posts = current_user.posts
+    @posts = PostsFilterService.new(current_user, params).process!
     render template: "posts/index"
   end
 

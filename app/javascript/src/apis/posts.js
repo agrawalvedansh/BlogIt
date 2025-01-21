@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const fetch = () => axios.get("/posts");
+const fetch = params => axios.get(`/posts?${params.toString()}`);
 
-const fetchUserPosts = () => axios.get("/posts/my_posts");
+const fetchUserPosts = params =>
+  axios.get(`/posts/my_posts?${params.toString()}`);
 
 const create = payload =>
   axios.post("/posts", {

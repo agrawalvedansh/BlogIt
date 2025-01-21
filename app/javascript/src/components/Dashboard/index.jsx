@@ -12,10 +12,15 @@ const Dashboard = ({ history }) => {
   const [selectedCategories, setSelectedCategories] = useState(new Set());
 
   const fetchPosts = async () => {
+    const queryParams = new URLSearchParams();
+
+    selectedCategories.forEach(category => {
+      queryParams.append("category_ids[]", category.value);
+    });
     try {
       const {
         data: { posts },
-      } = await postsApi.fetch();
+      } = await postsApi.fetch(queryParams);
       setPosts(posts);
       setLoading(false);
     } catch (error) {
