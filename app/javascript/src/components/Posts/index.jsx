@@ -6,7 +6,7 @@ import { PageLoader } from "components/commons";
 import PostCard from "./PostCard";
 
 const Posts = ({ data, selectedCategories }) => {
-  const [votes, setVotes] = useState([]);
+  const [votesMap, setVotesMap] = useState({});
   const [loading, setLoading] = useState(true);
 
   const fetchVotes = async () => {
@@ -14,7 +14,13 @@ const Posts = ({ data, selectedCategories }) => {
       const {
         data: { votes },
       } = await votesApi.fetch();
-      setVotes(votes);
+
+      const voteMap = votes.reduce((acc, vote) => {
+        acc[vote.id] = vote.is_upvote;
+
+        return acc;
+      }, {});
+      setVotesMap(voteMap);
       setLoading(false);
     } catch (error) {
       logger.error(error);
@@ -55,11 +61,12 @@ const Posts = ({ data, selectedCategories }) => {
             date={updated_at}
             downvotes={downvotes}
             key={id}
+            postId={id}
             slug={slug}
             title={title}
             upvotes={upvotes}
             user={user}
-            votes={votes}
+            userVote={votesMap[id]}
           />
         )
       )}

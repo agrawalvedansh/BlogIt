@@ -1,6 +1,7 @@
 import React from "react";
 
 import { UpArrow, DownArrow } from "@bigbinary/neeto-icons";
+import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { parseDate } from "src/utils/dateUtils";
 
@@ -14,6 +15,7 @@ const PostCard = ({
   user,
   upvotes,
   downvotes,
+  userVote,
 }) => {
   const { day, monthName, year } = parseDate(date);
 
@@ -36,13 +38,21 @@ const PostCard = ({
         </p>
       </div>
       <div className="mr-20 flex flex-col items-center gap-2">
-        <UpArrow className="cursor-pointer" size={30} onClick={handleUpvote} />
+        <UpArrow
+          size={30}
+          className={classnames("cursor-pointer", {
+            "text-red-500": userVote === true,
+          })}
+          onClick={handleUpvote}
+        />
         <div className="text-xl font-bold">
           {Number(upvotes) - Number(downvotes)}
         </div>
         <DownArrow
-          className="cursor-pointer"
           size={30}
+          className={classnames("cursor-pointer", {
+            "text-red-500": userVote === false,
+          })}
           onClick={handleDownvote}
         />
       </div>
