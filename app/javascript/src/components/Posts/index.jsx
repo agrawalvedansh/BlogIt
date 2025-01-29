@@ -11,16 +11,26 @@ const Posts = ({ data, selectedCategories }) => {
         );
 
   return (
-    <div className="mx-14 flex flex-col gap-20">
+    <div className="mx-14 flex flex-col gap-8">
       {filteredData.map(
-        ({ id, title, description, updated_at, slug, categories, user }) => (
+        ({
+          id,
+          title,
+          updated_at,
+          slug,
+          categories,
+          user,
+          upvotes,
+          downvotes,
+        }) => (
           <PostCard
             categories={categories}
             date={updated_at}
+            downvotes={downvotes}
             key={id}
-            preview={description}
             slug={slug}
             title={title}
+            upvotes={upvotes}
             user={user}
           />
         )

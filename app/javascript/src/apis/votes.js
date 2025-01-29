@@ -5,11 +5,10 @@ const create = payload =>
     vote: payload,
   });
 
-const update = ({ id, payload }) => {
+const update = ({ id, payload }) =>
   axios.put(`/votes/${id}`, {
     vote: payload,
   });
-};
 
 const votesApi = { create, update };
 

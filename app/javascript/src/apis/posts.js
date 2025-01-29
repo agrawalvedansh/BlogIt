@@ -15,7 +15,7 @@ const show = slug => axios.get(`/posts/${slug}`);
 const update = ({ slug, payload, quiet }) => {
   const path = quiet ? `/posts/${slug}?quiet` : `/posts/${slug}`;
 
-  axios.put(path, {
+  return axios.put(path, {
     post: payload,
   });
 };

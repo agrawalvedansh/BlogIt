@@ -1,26 +1,51 @@
 import React from "react";
 
+import { UpArrow, DownArrow } from "@bigbinary/neeto-icons";
 import { Link } from "react-router-dom";
 import { parseDate } from "src/utils/dateUtils";
 
 import CategoryTags from "./CategoryTags";
 
-const PostCard = ({ title, preview, date, slug, categories, user }) => {
+const PostCard = ({
+  title,
+  date,
+  slug,
+  categories,
+  user,
+  upvotes,
+  downvotes,
+}) => {
   const { day, monthName, year } = parseDate(date);
 
+  const handleUpvote = () => {};
+
+  const handleDownvote = () => {};
+
   return (
-    <div className="h-24">
-      <Link className="text-2xl font-semibold" to={`/posts/${slug}/show`}>
-        {title}
-      </Link>
-      <CategoryTags {...{ categories }} />
-      <p className="line-clamp-2">{preview}</p>
-      <p className="mb-1 mt-3 text-xs font-semibold text-slate-600">
-        {user.name}
-      </p>
-      <p className="border-b-2 pb-2 text-xs text-slate-400">
-        {day} {monthName} {year}
-      </p>
+    <div className="flex h-32 items-center justify-between border-b-2">
+      <div>
+        <Link className="text-2xl font-semibold" to={`/posts/${slug}/show`}>
+          {title}
+        </Link>
+        <CategoryTags {...{ categories }} />
+        <p className="mb-1 mt-3 text-xs font-semibold text-slate-600">
+          {user.name}
+        </p>
+        <p className="pb-2 text-xs text-slate-400">
+          {day} {monthName} {year}
+        </p>
+      </div>
+      <div className="mr-20 flex flex-col items-center gap-2">
+        <UpArrow className="cursor-pointer" size={30} onClick={handleUpvote} />
+        <div className="text-xl font-bold">
+          {Number(upvotes) - Number(downvotes)}
+        </div>
+        <DownArrow
+          className="cursor-pointer"
+          size={30}
+          onClick={handleDownvote}
+        />
+      </div>
     </div>
   );
 };
