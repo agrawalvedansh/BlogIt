@@ -10,7 +10,6 @@ import { ProgressBar } from "components/commons";
 
 const DownloadReport = ({ onClose }) => {
   const [progress, setProgress] = useState(0);
-  const [message, setMessage] = useState("");
 
   const { slug } = useParams();
 
@@ -37,7 +36,6 @@ const DownloadReport = ({ onClose }) => {
   useEffect(() => {
     subscribeToReportDownloadChannel({
       consumer,
-      setMessage,
       setProgress,
       generatePdf,
     });
@@ -49,20 +47,15 @@ const DownloadReport = ({ onClose }) => {
 
   useEffect(() => {
     if (progress === 100) {
-      setMessage("Report is ready to be downloaded");
       downloadPdf();
     }
   }, [progress]);
 
   return (
-    <div className="flex flex-col gap-y-8">
-      <div className="mb-4 w-full">
-        <div className="mx-auto mb-4 w-full overflow-hidden rounded-lg border border-gray-200 bg-white text-gray-800 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-2xl">
-          <div className="space-y-2 p-6">
-            <p className="text-xl font-semibold">{message}</p>
-            <ProgressBar progress={progress} />
-          </div>
-        </div>
+    <div className="flex flex-col gap-y-4">
+      <div className="rounded-lg border border-gray-200 bg-white p-10">
+        <p className="mb-6 text-xl font-semibold">Downloading blog post</p>
+        <ProgressBar progress={progress} />
       </div>
     </div>
   );
