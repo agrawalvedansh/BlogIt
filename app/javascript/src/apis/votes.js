@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const fetch = () => axios.get("/votes");
+
 const create = payload =>
   axios.post("/votes", {
     vote: payload,
@@ -10,6 +12,6 @@ const update = ({ id, payload }) =>
     vote: payload,
   });
 
-const votesApi = { create, update };
+const votesApi = { create, update, fetch };
 
 export default votesApi;

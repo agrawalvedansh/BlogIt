@@ -3,6 +3,10 @@
 class VotesController < ApplicationController
   before_action :load_vote!, only: %i[update]
 
+  def index
+    @votes = current_user.votes
+  end
+
   def create
     vote = current_user.votes.new(vote_params)
     vote.save!
