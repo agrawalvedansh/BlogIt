@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { Button } from "@bigbinary/neetoui";
 import FileSaver from "file-saver";
 import { useParams } from "react-router-dom";
 
 import postsApi from "apis/posts";
 import createConsumer from "channels/consumer";
 import { subscribeToReportDownloadChannel } from "channels/reportDownloadChannel";
-import { Container, ProgressBar, PageTitle } from "components/commons";
+import { ProgressBar } from "components/commons";
 
-const DownloadReport = () => {
-  const [isLoading, setIsLoading] = useState(true);
+const DownloadReport = ({ onClose }) => {
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
 
@@ -27,14 +25,12 @@ const DownloadReport = () => {
   };
 
   const downloadPdf = async () => {
-    setIsLoading(true);
     try {
       const { data } = await postsApi.download(slug);
       FileSaver.saveAs(data, "blogit_post.pdf");
+      onClose();
     } catch (error) {
       logger.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -53,26 +49,22 @@ const DownloadReport = () => {
 
   useEffect(() => {
     if (progress === 100) {
-      setIsLoading(false);
       setMessage("Report is ready to be downloaded");
+      downloadPdf();
     }
   }, [progress]);
 
   return (
-    <Container>
-      <div className="flex flex-col gap-y-8">
-        <PageTitle title="Download report" />
-        <div className="mb-4 w-full">
-          <div className="mx-auto mb-4 w-full overflow-hidden rounded-lg border border-gray-200 bg-white text-gray-800 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-2xl">
-            <div className="space-y-2 p-6">
-              <p className="text-xl font-semibold">{message}</p>
-              <ProgressBar progress={progress} />
-            </div>
+    <div className="flex flex-col gap-y-8">
+      <div className="mb-4 w-full">
+        <div className="mx-auto mb-4 w-full overflow-hidden rounded-lg border border-gray-200 bg-white text-gray-800 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-2xl">
+          <div className="space-y-2 p-6">
+            <p className="text-xl font-semibold">{message}</p>
+            <ProgressBar progress={progress} />
           </div>
-          <Button label="Download" loading={isLoading} onClick={downloadPdf} />
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

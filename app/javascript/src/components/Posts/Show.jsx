@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import { Modal } from "@bigbinary/neetoui";
 import { useParams } from "react-router-dom";
 
 import postsApi from "apis/posts";
@@ -9,10 +10,12 @@ import stringTruncator from "utils/stringUtils";
 
 import AuthorCard from "./AuthorCard";
 import CategoryTags from "./CategoryTags";
+import DownloadReport from "./DownloadReport";
 
 const Show = ({ history }) => {
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { slug } = useParams();
 
@@ -23,7 +26,7 @@ const Show = ({ history }) => {
   };
 
   const handleDownload = () => {
-    history.push(`/posts/${post.slug}/report`);
+    setIsModalVisible(true);
   };
 
   const fetchPostDetails = async () => {
@@ -68,6 +71,9 @@ const Show = ({ history }) => {
         <AuthorCard date={updated_at} {...{ user }} />
         <p className="mx-16 whitespace-pre-wrap text-lg">{description}</p>
       </div>
+      <Modal isOpen={isModalVisible} onClose={() => setIsModalVisible(false)}>
+        <DownloadReport onClose={() => setIsModalVisible(false)} />
+      </Modal>
     </Container>
   );
 };
