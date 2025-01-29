@@ -10,6 +10,9 @@ Bundler.require(*Rails.groups)
 
 module BlogIt
   class Application < Rails::Application
+    # Load dotenv file
+    Dotenv::Railtie.load
+
     config.active_job.queue_adapter = :sidekiq
 
     # Initialize configuration defaults for originally generated Rails version.
