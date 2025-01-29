@@ -55,6 +55,7 @@ const Posts = ({ data, selectedCategories, fetchPosts }) => {
           user,
           upvotes,
           downvotes,
+          is_bloggable,
         }) => (
           <PostCard
             categories={categories}
@@ -63,6 +64,7 @@ const Posts = ({ data, selectedCategories, fetchPosts }) => {
             fetchPosts={fetchPosts}
             fetchVotes={fetchVotes}
             id={id}
+            is_bloggable={is_bloggable}
             key={id}
             postId={id}
             slug={slug}

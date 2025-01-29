@@ -1,6 +1,7 @@
 import React from "react";
 
 import { UpArrow, DownArrow } from "@bigbinary/neeto-icons";
+import { Tag } from "@bigbinary/neetoui";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { parseDate } from "src/utils/dateUtils";
@@ -21,6 +22,7 @@ const PostCard = ({
   userVote,
   fetchVotes,
   fetchPosts,
+  is_bloggable,
 }) => {
   const { day, monthName, year } = parseDate(date);
 
@@ -37,9 +39,21 @@ const PostCard = ({
   return (
     <div className="flex h-32 items-center justify-between border-b-2">
       <div>
-        <Link className="text-2xl font-semibold" to={`/posts/${slug}/show`}>
-          {title}
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link className="text-2xl font-semibold" to={`/posts/${slug}/show`}>
+            {title}
+          </Link>
+          {is_bloggable && (
+            <div>
+              <Tag
+                className="bg-white px-4"
+                label="Blog it"
+                style="primary"
+                type="outline"
+              />
+            </div>
+          )}
+        </div>
         <CategoryTags {...{ categories }} />
         <p className="mb-1 mt-3 text-xs font-semibold text-slate-600">
           {user.name}
@@ -52,7 +66,7 @@ const PostCard = ({
         <UpArrow
           size={30}
           className={classnames("cursor-pointer", {
-            "text-red-500": userVote === true,
+            "text-green-500": userVote === true,
           })}
           onClick={() => handleVote(true)}
         />
