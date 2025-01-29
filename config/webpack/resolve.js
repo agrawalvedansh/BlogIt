@@ -10,6 +10,7 @@ module.exports = {
     components: absolutePath("src/components"),
     utils: absolutePath("src/utils"),
     constants: absolutePath("src/constants"),
+    channels: absolutePath("src/channels"),
   },
   extensions: [
     ".ts",
