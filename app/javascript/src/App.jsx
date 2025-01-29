@@ -10,6 +10,7 @@ import { getFromLocalStorage } from "utils/storage";
 
 import Dashboard from "./components/Dashboard";
 import CreatePost from "./components/Posts/Create";
+import DownloadReport from "./components/Posts/DownloadReport";
 import EditPost from "./components/Posts/Edit";
 import Show from "./components/Posts/Show";
 import UserPosts from "./components/UserPosts";
@@ -28,6 +29,7 @@ const App = () => {
         <Route exact component={CreatePost} path="/posts/create" />
         <Route exact component={EditPost} path="/posts/:slug/edit" />
         <Route exact component={UserPosts} path="/posts/user" />
+        <Route exact component={DownloadReport} path="/posts/:slug/report" />;
         <PrivateRoute
           component={Dashboard}
           condition={isLoggedIn}

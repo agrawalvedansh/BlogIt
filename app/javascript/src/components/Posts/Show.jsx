@@ -22,6 +22,10 @@ const Show = ({ history }) => {
     history.push(`/posts/${post.slug}/edit`);
   };
 
+  const handleDownload = () => {
+    history.push(`/posts/${post.slug}/report`);
+  };
+
   const fetchPostDetails = async () => {
     try {
       const {
@@ -53,8 +57,10 @@ const Show = ({ history }) => {
           <CategoryTags {...{ categories }} />
         </div>
         <PageTitle
+          showDownloadButton
           buttonLabel="Edit Post"
           handleClick={updatePost}
+          handleDownload={handleDownload}
           showButton={userId === user.id}
           showDraftTag={status === "draft"}
           title={stringTruncator(title)}

@@ -92,3 +92,8 @@ end
 gem "pundit"
 
 gem "sidekiq", "<7"
+
+# PDF generation gem
+gem "wicked_pdf"
+# wicked_pdf uses the following binary
+gem "wkhtmltopdf-binary"

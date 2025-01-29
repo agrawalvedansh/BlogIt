@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       collection do
         get :my_posts
       end
+      resource :report, only: %i[create], module: :posts do
+        get :download, on: :collection
+      end
     end
     resources :categories, only: %i[index create]
     resources :users, only: :create

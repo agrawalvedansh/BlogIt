@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { Download } from "@bigbinary/neeto-icons";
 import { Button, ActionDropdown, Tag } from "@bigbinary/neetoui";
 
 const PageTitle = ({
@@ -9,6 +10,8 @@ const PageTitle = ({
   handleClick,
   showDropdown,
   showDraftTag,
+  showDownloadButton,
+  handleDownload,
   history,
 }) => {
   const { Menu, MenuItem } = ActionDropdown;
@@ -23,6 +26,11 @@ const PageTitle = ({
           label="Draft"
           style="danger"
         />
+      )}
+      {showDownloadButton && (
+        <div className="ml-auto mr-4 cursor-pointer">
+          <Download onClick={handleDownload} />
+        </div>
       )}
       {showButton && (
         <div>
