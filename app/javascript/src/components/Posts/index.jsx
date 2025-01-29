@@ -5,7 +5,7 @@ import { PageLoader } from "components/commons";
 
 import PostCard from "./PostCard";
 
-const Posts = ({ data, selectedCategories }) => {
+const Posts = ({ data, selectedCategories, fetchPosts }) => {
   const [votesMap, setVotesMap] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -60,6 +60,9 @@ const Posts = ({ data, selectedCategories }) => {
             categories={categories}
             date={updated_at}
             downvotes={downvotes}
+            fetchPosts={fetchPosts}
+            fetchVotes={fetchVotes}
+            id={id}
             key={id}
             postId={id}
             slug={slug}

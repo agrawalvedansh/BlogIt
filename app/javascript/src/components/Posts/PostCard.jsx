@@ -5,9 +5,12 @@ import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { parseDate } from "src/utils/dateUtils";
 
+import votesApi from "apis/votes";
+
 import CategoryTags from "./CategoryTags";
 
 const PostCard = ({
+  id,
   title,
   date,
   slug,
@@ -16,12 +19,20 @@ const PostCard = ({
   upvotes,
   downvotes,
   userVote,
+  fetchVotes,
+  fetchPosts,
 }) => {
   const { day, monthName, year } = parseDate(date);
 
-  const handleUpvote = () => {};
-
-  const handleDownvote = () => {};
+  const handleVote = async is_upvote => {
+    if (userVote === undefined) {
+      await votesApi.create({ post_id: id, is_upvote });
+    } else {
+      await votesApi.update({ id, payload: { is_upvote } });
+    }
+    fetchVotes();
+    fetchPosts();
+  };
 
   return (
     <div className="flex h-32 items-center justify-between border-b-2">
@@ -43,7 +54,7 @@ const PostCard = ({
           className={classnames("cursor-pointer", {
             "text-red-500": userVote === true,
           })}
-          onClick={handleUpvote}
+          onClick={() => handleVote(true)}
         />
         <div className="text-xl font-bold">
           {Number(upvotes) - Number(downvotes)}
@@ -53,7 +64,7 @@ const PostCard = ({
           className={classnames("cursor-pointer", {
             "text-red-500": userVote === false,
           })}
-          onClick={handleDownvote}
+          onClick={() => handleVote(false)}
         />
       </div>
     </div>

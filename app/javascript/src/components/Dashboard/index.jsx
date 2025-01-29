@@ -64,7 +64,7 @@ const Dashboard = ({ history }) => {
           handleClick={handleClick}
           title="Blog Posts"
         />
-        <Posts data={posts} {...{ selectedCategories }} />
+        <Posts data={posts} {...{ selectedCategories, fetchPosts }} />
       </div>
     </Container>
   );

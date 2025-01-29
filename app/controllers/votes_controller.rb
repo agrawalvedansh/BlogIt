@@ -10,7 +10,7 @@ class VotesController < ApplicationController
   def create
     vote = current_user.votes.new(vote_params)
     vote.save!
-    update_post_vote_counts(vote.post)
+    update_post(vote.post)
     render_json
   end
 
@@ -18,7 +18,7 @@ class VotesController < ApplicationController
     old_vote = @vote.is_upvote
 
     @vote.update!(vote_params)
-    update_post_vote_counts(@vote.post, old_vote)
+    update_post(@vote.post, old_vote)
     render_json
   end
 
@@ -29,16 +29,17 @@ class VotesController < ApplicationController
     end
 
     def load_vote!
-      @vote = Vote.find(params[:id])
+      @vote = Vote.find_by(post_id: params[:id])
     end
 
-    def update_post_vote_counts(post, old_vote = nil)
+    def update_post(post, old_vote = nil)
       if old_vote.nil?
         if vote_params[:is_upvote]
           post.increment!(:upvotes)
         else
           post.increment!(:downvotes)
         end
+        update_post_is_bloggable(post)
       else
         if old_vote != vote_params[:is_upvote]
           if vote_params[:is_upvote]
@@ -48,7 +49,18 @@ class VotesController < ApplicationController
             post.decrement!(:upvotes)
             post.increment!(:downvotes)
           end
+          update_post_is_bloggable(post)
         end
+      end
+    end
+
+    def update_post_is_bloggable(post)
+      net_votes = post.upvotes - post.downvotes
+
+      if net_votes > 5
+        post.update!(is_bloggable: true)
+      else
+        post.update!(is_bloggable: false)
       end
     end
 end
