@@ -28,6 +28,6 @@ class VotesController < ApplicationController
     end
 
     def load_vote!
-      @vote = Vote.find_by(post_id: params[:id])
+      @vote = Vote.find_by(post_id: params[:id], user_id: current_user.id)
     end
 end
