@@ -3,7 +3,8 @@
 class ReportsJob
   include Sidekiq::Job
 
-  def perform(slug, report_path)
+  def perform(slug, user_id)
+    ActionCable.server.broadcast(user_id, { message: I18n.t("report.render"), progress: 25 })
     post = Post.find_by(slug:)
     html_report = ApplicationController.render(
       assigns: {
@@ -12,7 +13,9 @@ class ReportsJob
       template: "posts/report/download",
       layout: "pdf"
     )
+    ActionCable.server.broadcast(user_id, { message: I18n.t("report.generate"), progress: 50 })
     pdf_report = WickedPdf.new.pdf_from_string html_report
+    ActionCable.server.broadcast(user_id, { message: I18n.t("report.upload"), progress: 75 })
     if post.report.attached?
       post.report.purge_later
     end
@@ -20,5 +23,6 @@ class ReportsJob
       io: StringIO.new(pdf_report), filename: "report.pdf",
       content_type: "application/pdf")
     post.save
+    ActionCable.server.broadcast(user_id, { message: I18n.t("report.attach"), progress: 100 })
   end
 end

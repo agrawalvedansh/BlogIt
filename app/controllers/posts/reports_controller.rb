@@ -2,8 +2,7 @@
 
 class Posts::ReportsController < ApplicationController
   def create
-    ReportsJob.perform_async(params[:post_slug], report_path)
-    render_notice("Report generation in progress")
+    ReportsJob.perform_async(params[:post_slug], current_user.id)
   end
 
   def download
@@ -16,10 +15,6 @@ class Posts::ReportsController < ApplicationController
   end
 
   private
-
-    def report_path
-      @_report_path ||= Rails.root.join("tmp/#{pdf_file_name}")
-    end
 
     def pdf_file_name
       "blogit_post.pdf"
